@@ -17,20 +17,19 @@ export default function Header() {
   const role = user?.user_metadata?.role;
 
   return (
-    <header className="bg-christmas-blue text-white shadow-md">
+    <header className="bg-gradient-to-r from-christmas-blue to-blue-600 text-white shadow-md sticky top-0 z-40">
       <nav className="container mx-auto p-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-festive-gold">
+        <h1 className="text-xl font-bold text-festive-gold tracking-wide">
           <Link href="/">Veeran Winter Cup Live</Link>
         </h1>
         <div className="space-x-4 flex items-center">
           <Link href="/standings" className="hover:text-festive-gold">Team Standings</Link>
           <Link href="/history" className="hover:text-festive-gold">Match History</Link>
-          
           {user ? (
             <>
               {role === 'admin' && <Link href="/admin" className="hover:text-festive-gold">Admin Panel</Link>}
               {role === 'referee' && <Link href="/referee" className="hover:text-festive-gold">Referee Panel</Link>}
-              <button onClick={handleLogout} className="bg-festive-gold text-christmas-blue font-bold py-1 px-3 rounded">
+              <button onClick={handleLogout} className="bg-festive-gold text-christmas-blue font-bold py-1 px-3 rounded shadow-sm hover:shadow">
                 Logout
               </button>
             </>

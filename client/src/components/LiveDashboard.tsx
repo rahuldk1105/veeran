@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import StatsOverview from './StatsOverview';
+import TrendChart from './TrendChart';
+import DonutChart from './DonutChart';
 
 // Define types for our data
 interface Team {
@@ -27,7 +30,7 @@ export default function LiveDashboard() {
   const [error, setError] = useState<string | null>(null);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const wsUrl = process.env.NEXT_PUBLIC_WS_URL;
+  const wsUrl = process.env.NEXT_PUBLIC_WS_URL || (apiUrl ? apiUrl.replace(/^http/, 'ws') : undefined);
   const [wsConnected, setWsConnected] = useState(false);
 
   useEffect(() => {
@@ -51,7 +54,7 @@ export default function LiveDashboard() {
 
     // Set up WebSocket connection with retry logic
     if (!wsUrl) {
-      console.error('WebSocket URL is not defined');
+      console.warn('WebSocket URL is not defined');
       return;
     }
 
@@ -59,6 +62,8 @@ export default function LiveDashboard() {
     let reconnectAttempts = 0;
     const maxReconnectAttempts = 5;
     const reconnectDelay = 2000; // 2 seconds
+    let reconnectTimeout: ReturnType<typeof setTimeout> | null = null;
+    let isUnmounted = false;
 
     const connectWebSocket = () => {
       try {
@@ -106,11 +111,21 @@ export default function LiveDashboard() {
         };
 
         ws.onclose = (event) => {
-          console.log(`WebSocket closed. Code: ${event.code}, Reason: ${event.reason || 'No reason provided'}. ReadyState: ${ws.readyState}`);
+          console.log(`WebSocket closed. Code: ${event.code}, Reason: ${event.reason || 'No reason provided'}. ReadyState: ${ws?.readyState}`);
+          setWsConnected(false);
+          if (!isUnmounted && event.code !== 1000 && reconnectAttempts < maxReconnectAttempts) {
+            reconnectAttempts += 1;
+            const delay = reconnectDelay;
+            console.log(`Attempting reconnect #${reconnectAttempts} in ${delay}ms...`);
+            reconnectTimeout = setTimeout(() => {
+              connectWebSocket();
+            }, delay);
+          }
         };
 
         ws.onerror = (event) => {
-            console.error(`WebSocket error event. Type: ${event.type}. ReadyState: ${ws.readyState}. Event object:`, event);
+            console.warn(`WebSocket error event. Type: ${event.type}. ReadyState: ${ws?.readyState}. Event object:`, event);
+            setWsConnected(false);
         };
       } catch (err) {
         console.error('Failed to create WebSocket:', err);
@@ -123,8 +138,14 @@ export default function LiveDashboard() {
 
     // Clean up WebSocket connection on component unmount
     return () => {
+      isUnmounted = true;
+      if (reconnectTimeout) {
+        clearTimeout(reconnectTimeout);
+      }
       if (ws) {
-        ws.close(1000, 'Component unmounted');
+        try {
+          ws.close(1000, 'Component unmounted');
+        } catch {}
       }
     };
   }, [apiUrl, wsUrl]);
@@ -138,6 +159,8 @@ export default function LiveDashboard() {
 
   return (
     <div className="space-y-8">
+      <StatsOverview matches={matches} />
+
       {/* Connection Status Indicator */}
       <div className="flex items-center justify-between bg-gray-100 p-3 rounded-lg">
         <span className="text-sm font-medium">Live Updates</span>
@@ -147,13 +170,21 @@ export default function LiveDashboard() {
         </div>
       </div>
 
+      <section>
+        <h3 className="text-2xl font-semibold mb-4 border-b-2 border-christmas-blue pb-2 text-christmas-blue">Insights</h3>
+        <div className="grid gap-4 md:grid-cols-2">
+          <TrendChart values={completedMatches.map(m => m.scoreA + m.scoreB)} title="Goals per Completed Match" />
+          <DonutChart items={Object.entries(matches.reduce((acc: Record<string, number>, m) => { acc[m.category] = (acc[m.category] || 0) + 1; return acc; }, {})).map(([label, value]) => ({ label, value }))} title="Matches by Category" />
+        </div>
+      </section>
+
       {/* Live Match Section */}
       <section>
         <h3 className="text-2xl font-semibold mb-4 border-b-2 border-christmas-blue pb-2 text-christmas-blue">Live Matches</h3>
         {liveMatches.length > 0 ? (
           <div className="grid gap-4 md:grid-cols-2">
             {liveMatches.map(match => (
-              <div key={match._id} className="bg-white rounded-lg shadow-md p-4">
+              <div key={match._id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
                 {/* Placeholder for live match component */}
                 <p>{match.teamA.name} vs {match.teamB.name}</p>
                 <p className="bg-gray-800 text-festive-gold p-4 rounded-lg text-center font-mono text-5xl tracking-widest">{match.scoreA} - {match.scoreB}</p>

@@ -1,6 +1,5 @@
-import type { Config } from 'tailwindcss'
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+export default {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -13,10 +12,9 @@ const config: Config = {
         'festive-gold': '#FFD966',
       },
       backgroundImage: {
-        'snowflakes': "url('/path-to-your-snowflake-background.svg')", // I will add a placeholder path for now
+        'snowflakes': "url('/path-to-your-snowflake-background.svg')",
       },
     },
   },
   plugins: [],
 }
-export default config
