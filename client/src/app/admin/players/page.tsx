@@ -104,7 +104,7 @@ const PlayersManagementPage = () => {
             {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
             
             {/* Add Player Form */}
-            <div className="card mb-8">
+            <div className="bg-white rounded-lg shadow-md p-4 mb-8">
                  <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Add New Player</h3>
                  <form onSubmit={handleAddPlayer} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="text" placeholder="Player Name" value={playerName} onChange={e => setPlayerName(e.target.value)} required className="shadow appearance-none border rounded w-full py-2 px-3"/>
@@ -124,7 +124,7 @@ const PlayersManagementPage = () => {
             </div>
 
             {/* Players Table */}
-            <div className="card">
+            <div className="bg-white rounded-lg shadow-md p-4">
                 <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Existing Players</h3>
                 {loading ? <p>Loading...</p> : (
                     <table className="w-full text-sm text-left">

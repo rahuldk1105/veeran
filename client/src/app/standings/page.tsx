@@ -52,13 +52,13 @@ const StandingsPage = () => {
     <div>
       <h2 className="text-3xl font-bold mb-6 text-center text-christmas-blue">Team Standings</h2>
       {standings.length === 0 ? (
-         <p className="text-center text-gray-500">Standings will be calculated as matches are completed.</p>
+         <p className="bg-white rounded-lg shadow-md p-4 text-center text-gray-500">Standings will be calculated as matches are completed.</p>
       ) : (
         <div className="space-y-8">
           {standings.map((categoryStanding) => (
             <section key={categoryStanding.category}>
               <h3 className="text-2xl font-semibold mb-4 text-christmas-blue">{categoryStanding.category}</h3>
-              <div className="card overflow-x-auto">
+              <div className="bg-white rounded-lg shadow-md p-4 overflow-x-auto">
                 <table className="w-full text-sm text-left">
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>

@@ -88,15 +88,15 @@ const MatchHistoryPage = () => {
     <div>
       <h2 className="text-3xl font-bold mb-6 text-center text-christmas-blue">Match History</h2>
       {completedMatches.length === 0 ? (
-        <p className="text-center text-gray-500">No matches have been completed yet.</p>
+        <p className="bg-white rounded-lg shadow-md p-4 text-center text-gray-500">No matches have been completed yet.</p>
       ) : (
         <div className="space-y-4">
           {completedMatches.map((match) => (
-            <div key={match._id} className="card">
+            <div key={match._id} className="bg-white rounded-lg shadow-md p-4">
               <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleMatchEvents(match._id)}>
                 <div className="flex items-center space-x-4">
                   <span className="font-bold text-lg">{match.teamA.name}</span>
-                  <span className="score-display text-2xl">{match.scoreA} - {match.scoreB}</span>
+                  <span className="bg-gray-800 text-festive-gold p-4 rounded-lg text-center font-mono text-5xl tracking-widest text-2xl">{match.scoreA} - {match.scoreB}</span>
                   <span className="font-bold text-lg">{match.teamB.name}</span>
                 </div>
                 <div className="text-right text-sm text-gray-500">

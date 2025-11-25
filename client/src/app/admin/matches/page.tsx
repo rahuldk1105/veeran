@@ -109,7 +109,7 @@ const MatchesManagementPage = () => {
             {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
 
             {/* Create Match Form */}
-            <div className="card mb-8">
+            <div className="bg-white rounded-lg shadow-md p-4 mb-8">
                 <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Create New Match</h3>
                 <form onSubmit={handleAddMatch} className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <select value={day} onChange={e => setDay(Number(e.target.value))} className="shadow p-2 border rounded">
@@ -141,7 +141,7 @@ const MatchesManagementPage = () => {
             </div>
 
              {/* Matches Table */}
-            <div className="card">
+            <div className="bg-white rounded-lg shadow-md p-4">
                 <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Scheduled Matches</h3>
                 {loading ? <p>Loading...</p> : (
                     <table className="w-full text-sm text-left">

@@ -11,7 +11,11 @@ const app = express();
 const server = http.createServer(app);
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -37,18 +41,15 @@ app.use('/api/standings', standingsRoutes);
 const refereeApiRoutes = require('./routes/refereeApiRoutes');
 app.use('/api/referee', refereeApiRoutes);
 
-
-
-
-
-
-
 const PORT = process.env.PORT || 5000;
 
 const { initWebSocket } = require('./services/websocket');
 
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  // Initialize WebSocket server
-  initWebSocket(server);
+// Initialize WebSocket server before listening
+initWebSocket(server);
+
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`✓ Server is running on port ${PORT}`);
+  console.log(`✓ HTTP Server: http://localhost:${PORT}`);
+  console.log(`✓ WebSocket Server: ws://localhost:${PORT}`);
 });

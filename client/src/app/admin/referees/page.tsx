@@ -78,7 +78,7 @@ const RefereesManagementPage = () => {
             {successMessage && <p className="text-green-600 text-sm mb-4">{successMessage}</p>}
 
             {/* Add Referee Form */}
-            <div className="card mb-8">
+            <div className="bg-white rounded-lg shadow-md p-4 mb-8">
                  <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Create New Referee</h3>
                  <form onSubmit={handleAddReferee} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="text" placeholder="Referee Name" value={refereeName} onChange={e => setRefereeName(e.target.value)} required className="shadow appearance-none border rounded w-full py-2 px-3"/>
@@ -88,7 +88,7 @@ const RefereesManagementPage = () => {
             </div>
 
             {/* Referees Table */}
-            <div className="card">
+            <div className="bg-white rounded-lg shadow-md p-4">
                 <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Existing Referees</h3>
                 {loading ? <p>Loading...</p> : (
                     <table className="w-full text-sm text-left">

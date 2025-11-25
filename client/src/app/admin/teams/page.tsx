@@ -98,7 +98,7 @@ const TeamsManagementPage = () => {
       <h2 className="text-3xl font-bold mb-6 text-christmas-blue">Manage Teams</h2>
 
       {/* Add Team Form */}
-      <div className="card mb-8">
+      <div className="bg-white rounded-lg shadow-md p-4 mb-8">
         <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Add New Team</h3>
         <form onSubmit={handleAddTeam} className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <input type="text" placeholder="Team Name" value={teamName} onChange={e => setTeamName(e.target.value)} required className="shadow appearance-none border rounded w-full py-2 px-3"/>
@@ -122,7 +122,7 @@ const TeamsManagementPage = () => {
       </div>
 
       {/* Teams Table */}
-      <div className="card">
+      <div className="bg-white rounded-lg shadow-md p-4">
         <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Existing Teams</h3>
         {loading ? <p>Loading...</p> : (
           <table className="w-full text-sm text-left">

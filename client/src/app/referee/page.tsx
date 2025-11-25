@@ -52,7 +52,7 @@ const RefereeDashboardPage = () => {
     if (error) return <p className="text-red-500">{error}</p>;
 
     return (
-        <div className="card">
+        <div className="bg-white rounded-lg shadow-md p-4">
             <h3 className="text-xl font-semibold mb-4 text-christmas-blue">My Assigned Matches</h3>
             <div className="space-y-4">
                 {myMatches.length > 0 ? myMatches.map(match => (

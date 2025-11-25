@@ -114,7 +114,7 @@ const MatchControlPage = () => {
     // Pre-Match View
     if (match.status === 'Upcoming') {
         return (
-            <div className="card text-center">
+            <div className="bg-white rounded-lg shadow-md p-4 text-center">
                 <h3 className="text-xl font-bold mb-4 text-christmas-blue">{match.teamA.name} vs {match.teamB.name}</h3>
                 <p className="mb-6">The match is scheduled to start. Review player lists and start the match when ready.</p>
                 <button onClick={handleStartMatch} className="bg-green-500 text-white font-bold py-4 px-8 rounded-full text-2xl">
@@ -129,13 +129,13 @@ const MatchControlPage = () => {
     // Live/Paused/Completed View
     return (
         <div>
-            <div className="card text-center mb-6">
+            <div className="bg-white rounded-lg shadow-md p-4 text-center mb-6">
                 <p className="text-lg">{match.teamA.name} vs {match.teamB.name}</p>
-                <p className="score-display my-2">{match.scoreA} - {match.scoreB}</p>
+                <p className="bg-gray-800 text-festive-gold p-4 rounded-lg text-center font-mono text-5xl tracking-widest my-2">{match.scoreA} - {match.scoreB}</p>
                 <p className={`font-bold text-xl ${match.status === 'Live' ? 'text-green-500' : 'text-red-500'}`}>{match.status}</p>
             </div>
             
-            <div className="card text-center">
+            <div className="bg-white rounded-lg shadow-md p-4 text-center">
                 <h3 className="text-xl font-bold mb-4 text-christmas-blue">Match Controls</h3>
                  <div className="flex justify-center space-x-4">
                     {match.status === 'Live' && <button onClick={handlePauseMatch} className="bg-yellow-500 text-white font-bold py-2 px-4 rounded">Pause Timer</button>}
@@ -147,7 +147,7 @@ const MatchControlPage = () => {
             {/* Event Modal */}
             {showEventModal && (
                  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                    <div className="card w-full max-w-md">
+                    <div className="bg-white rounded-lg shadow-md p-4 w-full max-w-md">
                         <h3 className="text-xl font-bold mb-4 text-christmas-blue">Record New Event</h3>
                         <form onSubmit={handleRecordEvent}>
                            <select value={eventType} onChange={e => setEventType(e.target.value)} className="shadow p-2 border rounded w-full mb-4">
