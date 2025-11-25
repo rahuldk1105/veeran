@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Link from "next/link";
 import { AuthProvider } from "@/contexts/AuthContext";
+import DashboardLayout from "@/components/DashboardLayout";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Veeran Winter Cup",
-  description: "Live scores and schedule for the Veeran Youth League Winter Cup.",
+  title: "Analytics Dashboard",
+  description: "Modern analytics dashboard with dark theme and data visualization",
 };
-
-import Header from "@/components/Header";
 
 export default function RootLayout({
   children,
@@ -20,12 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gray-100`}>
+      <body className={`${inter.className} bg-[#0f1117] text-white`}>
         <AuthProvider>
-          <Header />
-          <main className="container mx-auto p-4">
+          <DashboardLayout>
             {children}
-          </main>
+          </DashboardLayout>
         </AuthProvider>
       </body>
     </html>
