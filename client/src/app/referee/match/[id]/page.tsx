@@ -115,7 +115,7 @@ const MatchControlPage = () => {
     if (match.status === 'Upcoming') {
         return (
             <div className="card text-center">
-                <h3 className="text-xl font-bold mb-4">{match.teamA.name} vs {match.teamB.name}</h3>
+                <h3 className="text-xl font-bold mb-4 text-christmas-blue">{match.teamA.name} vs {match.teamB.name}</h3>
                 <p className="mb-6">The match is scheduled to start. Review player lists and start the match when ready.</p>
                 <button onClick={handleStartMatch} className="bg-green-500 text-white font-bold py-4 px-8 rounded-full text-2xl">
                     START MATCH
@@ -136,7 +136,7 @@ const MatchControlPage = () => {
             </div>
             
             <div className="card text-center">
-                <h3 className="text-xl font-bold mb-4">Match Controls</h3>
+                <h3 className="text-xl font-bold mb-4 text-christmas-blue">Match Controls</h3>
                  <div className="flex justify-center space-x-4">
                     {match.status === 'Live' && <button onClick={handlePauseMatch} className="bg-yellow-500 text-white font-bold py-2 px-4 rounded">Pause Timer</button>}
                     {match.status === 'Paused' && <button onClick={handleResumeMatch} className="bg-green-500 text-white font-bold py-2 px-4 rounded">Resume Timer</button>}
@@ -148,7 +148,7 @@ const MatchControlPage = () => {
             {showEventModal && (
                  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                     <div className="card w-full max-w-md">
-                        <h3 className="text-xl font-bold mb-4">Record New Event</h3>
+                        <h3 className="text-xl font-bold mb-4 text-christmas-blue">Record New Event</h3>
                         <form onSubmit={handleRecordEvent}>
                            <select value={eventType} onChange={e => setEventType(e.target.value)} className="shadow p-2 border rounded w-full mb-4">
                                <option>Goal</option><option>Yellow Card</option><option>Red Card</option><option>Foul</option><option>Self Goal</option>

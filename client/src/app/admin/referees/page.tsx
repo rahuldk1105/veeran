@@ -73,13 +73,13 @@ const RefereesManagementPage = () => {
 
     return (
         <div>
-            <h2 className="text-3xl font-bold mb-6">Manage Referees</h2>
+            <h2 className="text-3xl font-bold mb-6 text-christmas-blue">Manage Referees</h2>
             {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
             {successMessage && <p className="text-green-600 text-sm mb-4">{successMessage}</p>}
 
             {/* Add Referee Form */}
             <div className="card mb-8">
-                 <h3 className="text-xl font-semibold mb-4">Create New Referee</h3>
+                 <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Create New Referee</h3>
                  <form onSubmit={handleAddReferee} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="text" placeholder="Referee Name" value={refereeName} onChange={e => setRefereeName(e.target.value)} required className="shadow appearance-none border rounded w-full py-2 px-3"/>
                     <input type="email" placeholder="Referee Email" value={email} onChange={e => setEmail(e.target.value)} required className="shadow appearance-none border rounded w-full py-2 px-3"/>
@@ -89,7 +89,7 @@ const RefereesManagementPage = () => {
 
             {/* Referees Table */}
             <div className="card">
-                <h3 className="text-xl font-semibold mb-4">Existing Referees</h3>
+                <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Existing Referees</h3>
                 {loading ? <p>Loading...</p> : (
                     <table className="w-full text-sm text-left">
                          <thead className="text-xs text-gray-700 uppercase bg-gray-50">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 
 // Define types
@@ -43,7 +43,7 @@ const MatchesManagementPage = () => {
     
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         setLoading(true);
         if(!session) return;
         try {
@@ -59,16 +59,20 @@ const MatchesManagementPage = () => {
             setMatches(matchesData);
             setTeams(teamsData);
             setReferees(refereesData);
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("An unknown error occurred");
+            }
         } finally {
             setLoading(false);
         }
-    };
+    }, [session, apiUrl]);
 
     useEffect(() => {
         fetchData();
-    }, [session]);
+    }, [fetchData]);
 
     const handleAddMatch = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -88,8 +92,12 @@ const MatchesManagementPage = () => {
                 throw new Error(errData.message || 'Failed to create match');
             }
             fetchData(); // Refetch
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+             if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("An unknown error occurred");
+            }
         }
     };
 
@@ -97,12 +105,12 @@ const MatchesManagementPage = () => {
 
     return (
         <div>
-            <h2 className="text-3xl font-bold mb-6">Manage Matches</h2>
+            <h2 className="text-3xl font-bold mb-6 text-christmas-blue">Manage Matches</h2>
             {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
 
             {/* Create Match Form */}
             <div className="card mb-8">
-                <h3 className="text-xl font-semibold mb-4">Create New Match</h3>
+                <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Create New Match</h3>
                 <form onSubmit={handleAddMatch} className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <select value={day} onChange={e => setDay(Number(e.target.value))} className="shadow p-2 border rounded">
                         <option value={1}>Day 1 - Dec 27</option>
@@ -134,7 +142,7 @@ const MatchesManagementPage = () => {
 
              {/* Matches Table */}
             <div className="card">
-                <h3 className="text-xl font-semibold mb-4">Scheduled Matches</h3>
+                <h3 className="text-xl font-semibold mb-4 text-christmas-blue">Scheduled Matches</h3>
                 {loading ? <p>Loading...</p> : (
                     <table className="w-full text-sm text-left">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50">

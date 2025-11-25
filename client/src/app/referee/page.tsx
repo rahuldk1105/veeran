@@ -53,7 +53,7 @@ const RefereeDashboardPage = () => {
 
     return (
         <div className="card">
-            <h3 className="text-xl font-semibold mb-4">My Assigned Matches</h3>
+            <h3 className="text-xl font-semibold mb-4 text-christmas-blue">My Assigned Matches</h3>
             <div className="space-y-4">
                 {myMatches.length > 0 ? myMatches.map(match => (
                     <div key={match._id} className="border p-4 rounded-lg flex justify-between items-center">

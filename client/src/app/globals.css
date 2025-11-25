@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-gray-100 text-gray-800;
-  background-image: var(--snowflake-bg); /* Placeholder for snowflake background */
-}
-
-h1, h2, h3, h4, h5, h6 {
-  @apply text-christmas-blue;
-}
-
 .card {
   @apply bg-white rounded-lg shadow-md p-4;
 }

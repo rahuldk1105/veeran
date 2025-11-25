@@ -112,7 +112,7 @@ export default function LiveDashboard() {
     <div className="space-y-8">
       {/* Live Match Section */}
       <section>
-        <h3 className="text-2xl font-semibold mb-4 border-b-2 border-christmas-blue pb-2">Live Matches</h3>
+        <h3 className="text-2xl font-semibold mb-4 border-b-2 border-christmas-blue pb-2 text-christmas-blue">Live Matches</h3>
         {liveMatches.length > 0 ? (
           <div className="grid gap-4 md:grid-cols-2">
             {liveMatches.map(match => (
@@ -132,7 +132,7 @@ export default function LiveDashboard() {
 
       {/* Upcoming Matches Section */}
       <section>
-        <h3 className="text-2xl font-semibold mb-4 border-b-2 border-christmas-blue pb-2">Upcoming Matches</h3>
+        <h3 className="text-2xl font-semibold mb-4 border-b-2 border-christmas-blue pb-2 text-christmas-blue">Upcoming Matches</h3>
          {upcomingMatches.length > 0 ? (
           <div className="space-y-2">
             {upcomingMatches.map(match => (
@@ -151,7 +151,7 @@ export default function LiveDashboard() {
 
       {/* Completed Matches Section */}
       <section>
-        <h3 className="text-2xl font-semibold mb-4 border-b-2 border-christmas-blue pb-2">Completed Matches</h3>
+        <h3 className="text-2xl font-semibold mb-4 border-b-2 border-christmas-blue pb-2 text-christmas-blue">Completed Matches</h3>
         {completedMatches.length > 0 ? (
            <div className="space-y-2">
              {completedMatches.map(match => (

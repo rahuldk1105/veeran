@@ -34,7 +34,7 @@ export default function LoginPage() {
   return (
     <div className="flex justify-center items-center mt-10">
       <div className="w-full max-w-md card">
-        <h2 className="text-3xl font-bold mb-4 text-center">Login</h2>
+        <h2 className="text-3xl font-bold mb-4 text-center text-christmas-blue">Login</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
